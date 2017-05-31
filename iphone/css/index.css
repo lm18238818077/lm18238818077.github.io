@@ -1,0 +1,585 @@
+/*
+* @Author: Administrator
+* @Date:   2017-03-29 09:56:42
+* @Last Modified by:   Administrator
+* @Last Modified time: 2017-05-31 16:17:55
+*/
+*{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ 
+header{
+	width: 100%;
+	height: 44px;
+	background: #444;
+}
+header .guang{
+	width: 1000px;
+	height: 44px;
+	background: #444;
+	margin: 0 auto;
+	text-align: right;
+	line-height: 44px;
+	color: #969698;
+
+}
+
+.wheel{
+	position: relative;
+}
+
+.wheel .nav{
+	width: 100%;
+	height: 44px;
+	background: rgba(0,0,0,.8);
+	position: absolute;
+
+	
+	z-index: 10;
+}
+.wheel .nav .con1{
+	width: 1000px;
+	height: 100%;
+	margin: 0 auto;
+	background: rgba(0,0,0,0);
+	text-align: justify;
+	line-height: 44px;
+}
+.wheel .nav .con1 a{
+	text-decoration: none;
+	color: #fff;
+	display:inline-block;
+}
+.wheel .nav .con1 a:hover{
+	color:#A5A5A5 ;
+}
+.wheel .nav .con1:after{
+	content: "";
+	width: 100%;
+	height: 0;
+	display:inline-block;
+}
+.wheel .nav .con2{
+		display: none;
+	}
+.wheel .nav .con2 a:hover{
+	color:#A5A5A5 ;
+}
+.wheel .nav .con2:after{
+	content: "";
+	width: 100%;
+	height: 0;
+	display:inline-block;
+}
+/* banner开始 */
+.wheel{
+	width: 100%;
+	height: 540px;
+
+}
+.wheel .wheel-img{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+.wheel .wheel-img a{
+	background-image: url(../img/iphone7_large.png);
+	width: 100%;
+	height: 100%;
+	display: block;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center 200px;
+	background-color:  #CC3341;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+/* 字体 */
+.wheel .word{
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: 100px;
+	left: 0;
+	text-align: center;
+	color: #fff;
+	
+}
+.wheel .word h4{
+	font-size: 38px;
+}
+.wheel .word h3{
+	font-size: 24px;
+	padding: 15px;
+}
+.wheel .left,.wheel .right{
+	width: 300px;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+
+}
+.wheel .left{
+	left: 0;
+}
+.wheel .left>div,.wheel .right>div{
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	position: absolute;
+	text-align: center;
+	line-height: 64px;
+	font-size: 30px;
+	opacity: 0;
+	transition: all 1s ease;
+
+}
+.wheel .right>div{
+	right: 20px;
+}
+.wheel .left>div{
+	left: 20px;
+}
+.wheel .bth:hover div{
+	opacity: .2;
+}
+/* phpto */
+
+.photo1{
+	display: none;
+}
+.photo2{
+	display: none;
+}
+.photo{
+	width: 100%;
+	height: 198px;	
+	margin: 1px 0; 
+
+}
+.photo ul li{
+	width: 24.92%;
+	height: 198px;
+	float: left;
+	margin-right: 1px;
+	box-sizing: border-box;
+}
+.photo ul li:nth-last-child(1){
+	margin-right: 0;
+
+}
+.photo ul li img{
+	display: block;
+	width: 100%;
+	height: 100%;
+
+}
+.photo ul li a{
+	width: 100%;
+	height: 100%;
+	display: block;
+	
+}
+.photo ul li:nth-child(1){
+	background: url(../img/a_large.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo ul li:nth-child(2){
+	background: url(../img/i_large.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo ul li:nth-child(3){
+	background: url(../img/s_large.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo ul li:nth-child(4){
+	background: url(../img/w_large.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo1 ul li:nth-child(1){
+	background: url(../img/a_medium.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo1 ul li:nth-child(2){
+	background: url(../img/i_medium.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo1 ul li:nth-child(3){
+	background: url(../img/s_medium.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo1 ul li:nth-child(4){
+	background: url(../img/w_medium.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo2 ul li:nth-child(1){
+	background: url(../img/a_small.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo2 ul li:nth-child(2){
+	background: url(../img/i_small.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo2 ul li:nth-child(3){
+	background: url(../img/s_small.jpg) no-repeat center center;
+	background-size: cover;
+}
+.photo2 ul li:nth-child(4){
+	background: url(../img/w_small.jpg) no-repeat center center;
+	background-size: cover;
+}
+.br{
+	height: 52px;
+	
+	width:1000px;
+	margin: 0 auto;
+	border-bottom: 1px solid #D6D6D6;
+	font-size: 12px;
+	line-height: 52px;
+	color: #888888;
+	padding-left: 20px;
+	box-sizing: border-box;	
+}
+
+
+
+.bottom{
+	width: 1000px;
+	height: auto;
+	
+	border-bottom: 1px solid #D6D6D6;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-left: 20px;
+	box-sizing: border-box;	
+
+}
+.bottom ul {
+	float: left;
+	width: 20%;
+	height: auto;
+	overflow: hidden;
+	
+}
+.bottom ul li{
+	width: auto;
+	line-height: 20px;
+
+
+}
+
+.bottom ul a{
+	font-size: 12px;
+	color: #555555;
+	display: block;
+	text-decoration: none;
+	
+}
+
+.bottom ul li:first-child{
+	font-size: 12px;
+	font-weight: bold;
+	color: #333;
+}
+
+.bottom1{
+	display: none;
+}
+.bottom2 {
+	overflow: hidden;
+	width: 1000px;
+	margin: 0 auto;
+}
+.bottom2 .xia{
+	width: 100%;
+	height: auto;
+	font-size: 12px;
+	padding-left: 20px;
+
+}
+.bottom2 .xia a{
+	color: #0070C9;
+	text-decoration: none;
+
+}
+.bottom2 .xia1 {
+	width: 100%;
+	padding-left: 20px;
+	font-size: 12px;
+	color:#888; 
+	margin: 10px 0;
+}
+.bottom2 .xia1 ul li{
+	float: left;
+	padding-right: 20px;
+
+}
+.bottom2 .xia1 ul{
+	float: left;
+	width: 100%;
+	padding: 10px 0;
+}
+.bottom2 .xia1 span{
+	display: block;
+	float: left;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 定位尺寸 */
+@media screen and (max-width: 1000px){
+	.wheel .nav .con1{
+		width: 100%;
+		padding: 0 20px;
+		box-sizing: border-box;	
+	}
+	header .guang{
+	width: 100%;
+	padding: 0 20px;
+	box-sizing: border-box;	
+
+	}
+	.wheel .nav .con2{
+		display: none;
+	}
+	.wheel .wheel-img a{
+	background-image: url(../img/iphone7_medium.png);
+	width: 100%;
+	height: 521px;
+	display: block;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center 200px;
+	background-color:  #CC3341;
+	position: absolute;
+	top: 0px;
+	left: 0;
+}
+.wheel .word{
+
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: 120px;
+	left: 0;
+	text-align: center;
+	color: #fff;
+}
+.wheel .word h4{
+	font-size: 31px;
+}
+.wheel .word h3{
+	font-size: 21px;
+	padding: 15px;
+}
+/* photo */
+.photo{
+	display: none;
+}
+.photo1{
+	display: block;
+}
+.photo1{
+	width: 100%;
+	height: 400px;
+	
+	margin: 1px 0; 
+
+}
+.photo1 ul li{
+	width: 50%;
+	height: 200px;
+	
+	float: left;
+	padding-right: 1px;
+	box-sizing: border-box;
+}
+.photo1 ul li:nth-last-child(1){
+	margin-right: 0;
+
+}
+.photo1 ul li img{
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding-right: 1px;
+	padding-bottom: 1px;
+
+}
+.photo1 ul li a{
+	width: 100%;
+	height: 100%;
+	display: block;
+	
+	
+}
+
+.br{
+	
+	width:100%;
+}
+.bottom{
+	width: 100%;
+}
+.bottom1{
+	display: none;
+}
+
+
+
+
+}
+
+
+
+@media screen and (max-width: 770px){
+	.wheel .nav .con1{
+		display: none;
+	}
+	.wheel .nav .con2{
+		width: 100%;
+		height: 44px;
+		
+		margin: 0 auto;
+		background:rgba(0,0,0,.1);
+		text-align: justify;
+		line-height: 44px;
+		display: block;
+		padding: 0 20px;
+		box-sizing: border-box;
+	}
+	.wheel .nav .con2 a{
+		color: #fff;
+		text-decoration: none;
+	}
+	.wheel .wheel-img a{
+	background-image: url(../img/iphone7_small.png);
+	width: 100%;
+	height: 521px;
+	}
+	/* photo */
+	.photo1{
+		display: none;
+	}
+	.photo{
+		display: none;
+	}
+	.photo2{
+		display: block;
+	}
+	.photo2{
+	width: 100%;
+	height: 802px;
+
+	margin: 1px 0; 
+
+}
+.photo2 ul li{
+	width: 100%;
+	height: 202px;
+	
+	float: left;
+	padding-right: 1px;
+	box-sizing: border-box;
+}
+.photo2 ul li:nth-last-child(1){
+	margin-right: 0;
+
+}
+.photo2 ul li img{
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding-right: 1px;
+	padding-bottom: 1px;
+	
+
+}
+.photo2 ul li a{
+	width: 100%;
+	height: 100%;
+	display: block;
+	
+	
+}
+.bottom{
+	display: none;
+}
+.bottom1{
+	width: 100%;
+	height: 290px;
+}
+.bottom1>ul li{
+	width: 100%;
+	height: 37px;
+	padding-left: 20px;
+	border-bottom: 1px solid #333;
+	line-height: 37px;
+}
+.bottom1>li:nth-child(1){
+	padding-top: 30px;
+}
+.bottom1>ul li a{
+	text-decoration: none;
+	color: #888;
+}
+.bottom1 .xia{
+	width: 100%;
+	height: auto;
+	font-size: 12px;
+	padding-left: 20px;
+
+}
+.bottom1 .xia a{
+	color: #0070C9;
+	text-decoration: none;
+
+}
+.bottom1 .xia1 {
+	width: 100%;
+	padding-left: 20px;
+	font-size: 12px;
+	color:#888; 
+	margin: 10px 0;
+}
+.bottom1 .xia1 ul li{
+	float: left;
+	padding-right: 20px;
+
+}
+.bottom1 .xia1 ul{
+	float: left;
+	width: 100%;
+	padding: 10px 0;
+}
+.bottom1 .xia1 span{
+	display: block;
+	float: left;
+	
+}
+.bottom1{
+	display: block;
+}
+.bottom2{
+	display: none;
+}
+}

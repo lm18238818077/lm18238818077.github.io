@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            list-style: none;
+        }
+        html,body{
+            width: 100%;
+            height:100%;
+            overflow: hidden;
+        }
+        header{
+            width: 100%;
+            height:60px;
+            background: #dfdfdf;
+        }
+        header>input{
+            display: block;
+            width:300px;
+            height:50px;
+            padding:5px 15px;
+            margin:0 auto;
+            border:0;
+            outline:none;
+            background: rgba(0,0,0,.1);
+        }
+        section{
+            width: 500px;
+            height:auto;
+            margin:0 auto;
+        }
+        li{
+            width: 500px;
+            height:100px;
+            margin-bottom: 10px;
+            background: darkseagreen;
+            position: relative;
+        }
+        
+        li>input{
+            display:inline-block;
+            width: 20px;
+            height:20px;
+            background: #ff4400;
+            margin-top: 20px;
+
+
+        }
+        li>p{
+            display: inline-block;
+        }
+        h3{
+            position: relative;
+        }
+        h3>span{
+            float: right;
+            width: 30px;
+            height:30px;
+            background: gray;
+            border-radius: 50%;
+            position: absolute;
+            top:-5px;
+            right:0;
+            text-align: center;
+            line-height: 30px;
+
+        }
+        .todo{
+            height: auto;
+        }
+        .done{
+            height:auto;
+        }
+        button{
+            float: right;
+            width: 20px;
+            height:20px;
+        }
+    </style>
+<body>
+   <header>
+       <input type="text" placeholder="添加事项">
+   </header>
+    <section>
+        <h3>未完成事项 <span class="todocount">2</span></h3>
+        <ul class="todo">
+
+        </ul>
+        <h3>完成事项 <span class="donecount">2</span></h3>
+        <ol class="done">
+            <li><input type="checkbox"><p>旅游</p><button>×</button></li>
+            <li><input type="checkbox"><p>看比赛</p><button>×</button></li>
+        </ol>
+    </section>
+</body>
+</html>
+<script>
+    let todo=document.querySelector('.todo');
+    let done=document.querySelector('.done');
+    let input=document.querySelector('header>input')
+    let todocount=document.querySelector('.todocount');
+    let donecount=document.querySelector('.donecount');
+    let p=document.querySelector('p');
+    console.log(donecount)
+
+    load();
+    input.onkeydown=function(e){
+        if(e.keyCode==13){
+            add({title:this.value,done:false});
+            this.value=''
+        }
+    }
+
+    todo.onclick=function(e){
+        let obj= e.target;
+        if(obj.nodeName=='INPUT'){
+            let id=obj.parentNode.id;
+            finish(id)
+        }else if(obj.nodeName=='BUTTON'){
+            let id=obj.parentNode.id;
+            del(id)
+        }else if(obj.nodeName=='P'){
+            obj.onblur=function(){
+            let id=obj.parentNode.id;
+                let oldv=obj.innerText
+                fresh(id,oldv)
+            }
+        }
+    };
+
+    done.onclick=function(e){
+        let obj= e.target;
+        if(obj.nodeName=='INPUT'){
+            let id=obj.parentNode.id;
+            unfinish(id)
+        }else if(obj.nodeName=='BUTTON'){
+            let id=obj.parentNode.id
+            del(id)
+        }else if(obj.nodeName=='P'){
+            obj.onblur=function(){
+                let id=obj.parentNode.id;
+                let oldv=obj.innerText;
+                fresh(id,oldv)
+            }
+        }
+    }
+
+
+
+
+    function load(){
+        let data=localStorage.todo;
+        let todonum= 0,donenum= 0,todostring='',donestring='';
+        if(!data){
+            init();
+        }
+        data = JSON.parse(localStorage.todo);
+        data.forEach(function(value,index){
+            if(value.done){
+                donenum++;
+                donestring+=`
+                     <li id="${index}">
+                        <input type="checkbox">
+                        <p contenteditable="true">${value.title}</p>
+                        <button>×</button>
+                   </li>
+                `
+            }else{
+                todonum++;
+                todostring+=`
+                <li id="${index}">
+                    <input type="checkbox">
+                    <p contenteditable="true">${value.title}</p>
+                    <button>×</button>
+                </li>`
+            }
+        })
+        todo.innerHTML=todostring;
+        done.innerHTML=donestring;
+        todocount.innerText=todonum;
+        donecount.innerText=donenum;
+    }
+
+    function init(){
+        let things=[
+            {title:'找工作',done:false},
+            {title:'小米官网',done:false},
+            {title:'旅游',done:true},
+            {title:'看比赛',done:true}
+        ]
+        localStorage.todo=JSON.stringify(things)
+    }
+    function getdata(){
+        let data=localStorage.todo;
+        return JSON.parse(data);
+    }
+
+    function  savedata(data){
+        localStorage.todo=JSON.stringify(data)
+    }
+
+    function add(obj){
+        let data=getdata();
+        data.push(obj)
+        savedata(data);
+        load()
+    }
+    function finish(id){
+        let data=getdata()
+        data[id].done=true;
+        savedata(data);
+        load()
+    }
+    function unfinish(id){
+        let data=getdata()
+        data[id].done=false;
+        savedata(data);
+        load()
+    }
+    function del(id){
+        let data=getdata();
+        data.splice(id,1);
+        savedata(data)
+        load()
+    }
+    function  fresh(id,oldv){
+        let data=getdata();
+        data[id].title=oldv;
+        savedata(data)
+        load()
+    }
+
+</script>

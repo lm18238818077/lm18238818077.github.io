@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>game2</title>
+    <style>
+        body{
+            width: 100%;
+            height:100%;
+            background: url("img/bj1.jpg") no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .yun1,.yun2{
+            width: 500px;
+            height:300px;
+            background:url('img/cloud_two.png') no-repeat;
+            background-size: 100%;
+
+        }
+        .yun1{
+             position: absolute;
+             top:40px;
+             left:0px;
+            animation:yun1 5s ease-in-out infinite alternate;
+         }
+        .yun2{
+            position: absolute;
+            top:40px;
+            right:0px;
+            animation:yun2 7s ease-in-out infinite alternate;
+        }
+        @keyframes yun1 {
+             from{
+                 transform: translateX(650px);
+             }to{
+                  transform: translateX(0px);
+              }
+         }
+        @keyframes yun2 {
+            from{
+                transform: translateX(-700px);
+            }to{
+                 transform: translateX(0px);
+             }
+
+        }
+        .span2{
+            width: 120px;
+            height:20px;
+            display: inline-block;
+            background: red;
+            border-radius:5px ;
+
+            position: relative;
+        }
+        .spanson{
+            width: 100%;
+            height:20px;
+            background: green;
+            display: inline-block;
+            border-radius: 5px;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+        分数 <span class="span1">0</span>
+        生命值 <span class="span2">
+    <span class="spanson"></span>
+    </span>
+
+    </div>
+<div class="yun1">
+
+    </div>
+    <div class="yun2">
+
+    </div>
+</body>
+</html>
+<script>
+    let yun1=document.querySelector('.yun1');
+    function Game(){
+        this.charArr=[
+            ['A','img/a.jpg'],
+            ['B','img/b.jpg'],
+            ['C','img/c.jpg'],
+            ['D','img/d.jpg'],
+            ['E','img/e.jpg'],
+            ['F','img/f.jpg'],
+            ['G','img/g.jpg'],
+            ['H','img/h.jpg'],
+            ['I','img/i.jpg'],
+            ['J','img/j.jpg'],
+            ['K','img/k.jpg'],
+            ['L','img/l.jpg'],
+            ['M','img/m.jpg'],
+            ['N','img/n.jpg'],
+            ['O','img/o.jpg'],
+            ['P','img/p.jpg'],
+            ['Q','img/q.jpg'],
+            ['R','img/r.jpg'],
+            ['S','img/s.jpg'],
+            ['T','img/t.jpg'],
+            ['U','img/u.jpg'],
+            ['V','img/v.jpg'],
+            ['W','img/w.jpg'],
+            ['X','img/x.jpg'],
+            ['Y','img/y.jpg'],
+            ['Z','img/z.jpg']
+
+        ];
+
+        this.charlength=5;
+        this.cw=window.innerWidth;
+        this.currentEle=[];
+        this.currentPos=[];
+        this.speed=10;
+        this.score=0;
+        this.sm=10;
+        this.gq=10;
+        this.smElement=document.querySelector('.spanson');
+        this.scoreElement=document.querySelector('.span1')
+
+    }
+    Game.prototype={
+        start(){
+            this.getElements(this.charlength);
+        },
+        getElements(length){
+            for(let i=0;i<length;i++){
+                this.getChar();
+            }
+            this.drop()
+        },
+        getChar(){
+            let num=Math.floor(Math.random()*this.charArr.length);
+            while(this.checkRecept(this.charArr[num][0])){
+                num=Math.floor(Math.random()*this.charArr.length);
+            }
+            let lefts=Math.random()*(this.cw-200)+100;
+            let tops=Math.random()*100+100;
+
+            while(this.checkPos(lefts)){
+                lefts=Math.random()*(this.cw-200)+100;
+            }
+            //this.charArr[num][0]      this.currentEle[i].innerText
+
+
+            let ele=document.createElement('div');
+            ele.innerText=this.charArr[num][0];
+            ele.style.cssText=`width:60px;height:50px;font-size:0;border-radius:5px;
+            line-height:50px;text-align:center;color:red;position:absolute;
+            top:${tops}px;left:${lefts}px;background:url( ${this.charArr[num][1]}) no-repeat;
+            background-size:100% 100%;`
+            this.currentEle.push(ele);
+            this.currentPos.push(lefts)
+            document.body.appendChild(ele);
+
+
+        },checkRecept:function(text){
+            return this.currentEle.some(function(value){
+                return value.innerText==text;
+            })
+        },
+        checkPos:function(lefts){
+            // let eleW=this.current[0].offsetWidth;
+            // console.log(eleW);
+            return this.currentPos.some(function(value){
+                return (value+50>lefts&&lefts+50>value);
+            })
+        },
+        drop(){
+            let self=this;
+            this.t=setInterval(function(){
+
+                for(let i=0;i<self.currentEle.length;i++){
+                    let tops=self.currentEle[i].offsetTop+self.speed;
+                    self.currentEle[i].style.top=tops+'px';
+                    if(tops>500){
+                        document.body.removeChild(self.currentEle[i]);
+                        self.currentEle.splice(i,1);
+                        self.currentPos.splice(i,1);
+                        self.sm--;
+                        self.smElement.style.width=self.sm/10*100+'%'
+
+                        //重新开始
+                        if(self.sm==0){
+                            let flag=window.confirm('游戏结束，是否继续');
+                            if(flag){
+                                self.restart()
+                            }else{
+                                close()
+                            }
+                        }
+
+                    }
+                }
+                if(self.currentEle.length<self.charlength){
+                    self.getChar()
+                }
+            },1000)
+            this.key()
+
+        },
+        key(){
+            document.body.onkeydown=function(e){
+                for(let i=0;i<this.currentEle.length;i++){
+                    let code=String.fromCharCode(e.keyCode);
+                    if(code==this.currentEle[i].innerText){
+                        this.currentEle[i].style.transform='translateX(1500px)';
+                        this.currentEle[i].style.transitionDuration=`3s`;
+                        this.currentEle[i].addEventListener('webkitTranstionEnd',function(){
+                            document.body.removeChild(this.currentEle[i]);
+                        },false);
+                        this.currentEle.splice(i,1);
+                        this.currentPos.splice(i,1);
+                        this.score++;
+                        this.scoreElement.innerText=this.score;
+                        if(this.score==this.gq){
+                            this.next();
+                        }
+                    }
+                }
+                if(this.currentEle.length<this.charlength){
+                    this.getChar()
+                }
+            }.bind(this)
+        },
+            restart(){
+                clearInterval(this.t);
+                for(let i=0;i<this.currentEle.length;i++){
+                    document.body.removeChild(this.currentEle[i]);
+                }
+                this.currentEle=[];
+                this.currentPos=[];
+
+                this.sm=10;
+                this.smElement.style.width=this.sm/10*100+'%'
+                this.score=0;
+                this.scoreElement.innerText=this.score;
+
+                this.start();
+
+            },
+            next(){
+                clearInterval(this.t);
+                for(let i=0;i<this.currentEle.length;i++){
+                    document.body.removeChild(this.currentEle[i]);
+                }
+                this.currentEle=[];
+                this.currentPos=[];
+
+                this.charlength++;
+                this.gq+=10;
+                this.start();
+            }
+
+
+    }
+
+let game=new Game;
+    game.start();
+
+
+</script>
